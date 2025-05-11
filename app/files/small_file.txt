@@ -1,0 +1,4 @@
+In this exercise, you will build and document a system that is capable of serving lines out of a file to network clients.
+You may do this in any language (although Ruby, Java, JavaScript, or Scala are preferred).
+You may use any reference and any open-source software you can find to help you build this system, so long as you document your use.
+However, you should not actively collaborate with others.
