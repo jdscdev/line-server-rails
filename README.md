@@ -37,7 +37,7 @@ GET /lines/:index
 ## How it Works
 
 1. On boot, `LineIndex` indexes the file by storing byte offsets per line.
-2. These offsets are cached in memory using `Rails.cache`.
+2. These offsets are stored in memory.
 3. When a line is requested, `LineIndex#read_line` uses `File#seek` and `readline` to retrieve it efficiently.
 4. No full file read is performed on each request.
 
@@ -53,12 +53,21 @@ GET /lines/:index
 ## Libraries / Tools Used / Documentation Consulted
 
 - Rails API Mode
-- `Rails.cache` for memory-based instance storage
 - No DB or background workers required
 - https://rubygems.org/gems/
 - https://apidock.com/ruby
 - https://ruby-doc.org/
 - https://guides.rubyonrails.org/
+- https://corpus.canterbury.ac.nz/descriptions/
+
+---
+
+## Gems Used
+
+- `dotenv-rails`  - To use .env file in development
+- `pry-byebug`    - To debug in development and testing
+- `rspec-rails`   - To create specs and test code
+- `rubocop-rails` - For linting code with best coding practices and errors
 
 ---
 
