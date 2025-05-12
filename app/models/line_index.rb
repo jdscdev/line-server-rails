@@ -43,11 +43,11 @@ class LineIndex
 
     raise 'File is empty!' if offsets.empty?
 
-    puts "\n\n#### Finished Indexing File! ####\n\n"
+    puts "\n\n#### Finished Indexing #{line_number -= 1} lines from File! ####\n\n"
     offsets
   end
 
   def draw_indexed_lines_counter(current_line)
-    print "\rIndexed line #{current_line}"
+    print "\rIndexed #{current_line} line(s)"
   end
 end

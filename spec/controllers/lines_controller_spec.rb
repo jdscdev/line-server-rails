@@ -6,7 +6,6 @@ RSpec.describe LinesController, type: :controller do
   before do
     file_path = Rails.root.join('spec/files/test.txt')
     line_index_instance = LineIndex.new(file_path)
-    allow(Rails.cache).to receive(:fetch).and_return(line_index_instance)
   end
 
   describe 'GET #show' do
@@ -15,7 +14,7 @@ RSpec.describe LinesController, type: :controller do
       expect(response).to have_http_status(:ok)
       json_body = JSON.parse(response.body)
       expect(json_body).to have_key('line')
-      expect(json_body['line']).to start_with('This is test line 1.')
+      expect(json_body['line']).to start_with('In this exercise, you will build and document a system')
     end
 
     it 'returns line 2 with status 200' do
@@ -23,7 +22,7 @@ RSpec.describe LinesController, type: :controller do
       expect(response).to have_http_status(:ok)
       json_body = JSON.parse(response.body)
       expect(json_body).to have_key('line')
-      expect(json_body['line']).to start_with('This is test line 2.')
+      expect(json_body['line']).to start_with('You may do this in any language ')
     end
 
     it 'returns 413 for out-of-range index' do

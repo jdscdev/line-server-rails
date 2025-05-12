@@ -14,7 +14,9 @@ cd line-server-rails
 
 2. **Start the project**
 ```bash
-./run.sh
+# Txt Filename to Index (default "small_file.txt" or "bible.txt")
+# You can add other files into /app/files and INSERT HERE THEIR FILENAME
+./run.sh "small_file.txt"
 ```
 
 3. **Visit the app**
@@ -62,7 +64,7 @@ GET /lines/:index
 
 ## Design Patterns / Architecture
 
-- Dependency injection for file path
+- Dependency injection for file path and for LineIndex instance
 - In-memory indexing
 - Separation of concerns: controller vs model
 - No use of database (as requested)
