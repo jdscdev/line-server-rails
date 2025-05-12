@@ -22,7 +22,9 @@ Rails.application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
+    # rubocop:disable Style/StringLiterals
     "Cache-Control" => "public, max-age=#{1.hour.to_i}"
+    # rubocop:enable Style/StringLiterals
   }
 
   # Show full error reports and disable caching.

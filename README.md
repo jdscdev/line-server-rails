@@ -4,6 +4,22 @@
 
 This API serves lines from a static text file using a RESTful interface.
 
+### Setup Instructions
+
+1. **Clone the repo**
+```bash
+git clone https://github.com/jdscdev/line-server-rails
+cd line-server-rails
+```
+
+2. **Start the project**
+```bash
+./run.sh
+```
+
+3. **Visit the app**
+- API: http://localhost:3000/lines/1
+
 ### Endpoint
 
 ```
@@ -32,11 +48,15 @@ GET /lines/:index
 
 ---
 
-## Libraries / Tools Used
+## Libraries / Tools Used / Documentation Consulted
 
 - Rails API Mode
 - `Rails.cache` for memory-based instance storage
 - No DB or background workers required
+- https://rubygems.org/gems/
+- https://apidock.com/ruby
+- https://ruby-doc.org/
+- https://guides.rubyonrails.org/
 
 ---
 
@@ -68,4 +88,3 @@ GET /lines/:index
 ## Self-Critique
 
 - Could encapsulate error handling better in a service layer
-- Could make `LineIndex` injectable as a dependency, not just cached globally

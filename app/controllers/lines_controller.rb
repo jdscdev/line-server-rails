@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class LinesController < ApplicationController
-  def show
-    line_index_instance = Rails.cache.fetch('line_index_instance')
+  def initialize(line_index_instance = Rails.application.config.line_index_instance)
+    super()
+    @line_index_instance = line_index_instance
+  end
 
-    line_text = line_index_instance.read_line(line_index)
+  def show
+    line_text = @line_index_instance.read_line(line_index)
 
     render(json: { line: line_text }, status: :ok)
   rescue IndexError

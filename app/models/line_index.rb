@@ -12,6 +12,7 @@ class LineIndex
 
   def read_line(line_number)
     raise(ArgumentError, 'Invalid line number!') if line_number <= 0
+
     offset = lines_offsets[line_number]
     raise(IndexError, 'Line number out of range!') unless offset
 
