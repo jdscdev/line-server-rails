@@ -23,6 +23,7 @@ gem 'async', '~> 2.24'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
+  gem 'dotenv-rails', '~> 3.1', '>= 3.1.8'
   gem 'pry-byebug', '~> 3.11'
   gem 'rspec-rails', '~> 5.0.0'
 end
