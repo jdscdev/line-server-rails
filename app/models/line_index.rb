@@ -27,8 +27,9 @@ class LineIndex
 
   private
 
+  # rubocop:disable Rails/Output
   def index_file
-    Rails.logger.debug "\n#### Starting Indexing File \"#{File.basename(file_path)}\" ####\n\n"
+    puts "\n#### Starting Indexing File \"#{File.basename(file_path)}\" ####\n\n"
 
     offsets = {}
     current_offset = 0
@@ -43,11 +44,12 @@ class LineIndex
 
     raise 'File is empty!' if offsets.empty?
 
-    Rails.logger.debug "\n\n#### Finished Indexing #{line_number -= 1} lines from File! ####\n\n"
+    puts "\n\n#### Finished Indexing #{line_number -= 1} lines from File! ####\n\n"
     offsets
   end
 
   def draw_indexed_lines_counter(current_line)
-    Rails.logger.debug "\rIndexed #{current_line} line(s)"
+    print "\rIndexed #{current_line} line(s)"
   end
+  # rubocop:enable Rails/Output
 end
