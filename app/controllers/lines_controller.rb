@@ -11,7 +11,7 @@ class LinesController < ApplicationController
 
     render(json: { line: line_text }, status: :ok)
   rescue IndexError
-    render(json: { error: 'Line number out of range' }, status: 413)
+    render(json: { error: 'Line number out of range' }, status: :content_too_large)
   rescue ArgumentError => e
     render(json: { error: e.message }, status: :bad_request)
   rescue StandardError => e

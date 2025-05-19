@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # frozen_string_literal
 # This file is used by Rack-based servers to start the application.
 

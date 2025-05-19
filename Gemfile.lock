@@ -276,7 +276,8 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.1.5, >= 7.1.5.1)
   rspec-rails (~> 5.0.0)
-  rubocop-rails (~> 2.31)
+  rubocop
+  rubocop-rails
   sqlite3 (>= 1.4)
   tzinfo-data
 

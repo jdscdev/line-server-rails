@@ -20,15 +20,15 @@ class LineIndex
       f.seek(offset)
       f.readline
     end
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Failed to read line #{line_number}: #{e.message}")
-    raise
+    raise e
   end
 
   private
 
   def index_file
-    puts "\n#### Starting Indexing File \"#{File.basename(file_path)}\" ####\n\n"
+    Rails.logger.debug "\n#### Starting Indexing File \"#{File.basename(file_path)}\" ####\n\n"
 
     offsets = {}
     current_offset = 0
@@ -43,11 +43,11 @@ class LineIndex
 
     raise 'File is empty!' if offsets.empty?
 
-    puts "\n\n#### Finished Indexing #{line_number -= 1} lines from File! ####\n\n"
+    Rails.logger.debug "\n\n#### Finished Indexing #{line_number -= 1} lines from File! ####\n\n"
     offsets
   end
 
   def draw_indexed_lines_counter(current_line)
-    print "\rIndexed #{current_line} line(s)"
+    Rails.logger.debug "\rIndexed #{current_line} line(s)"
   end
 end

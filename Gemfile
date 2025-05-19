@@ -23,10 +23,11 @@ group :development, :test do
   gem 'dotenv-rails', '~> 3.1', '>= 3.1.8'
   gem 'pry-byebug', '~> 3.11'
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'rubocop-rails', '~> 2.31'
 end

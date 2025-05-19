@@ -3,11 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe LinesController, type: :controller do
-  before do
-    file_path = Rails.root.join('spec/files/test.txt')
-    line_index_instance = LineIndex.new(file_path)
-  end
-
   describe 'GET #show' do
     it 'returns line 1 with status 200' do
       get :show, params: { index: 1 }
