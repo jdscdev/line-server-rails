@@ -1,48 +1,48 @@
 # frozen_string_literal: true
 
 class LineIndex
-  attr_reader :lines_offsets, :file_path
+  attr_reader :lines_offsets, :filepath
 
-  def initialize(file_path)
-    @file_path = file_path
-    raise(ArgumentError, 'File does not exist!') unless File.exist?(file_path)
+  def initialize
+    filename = ENV.fetch('LINE_SERVER_FILE', '')
+    raise(ArgumentError, 'Missing filename!') if filename.blank?
+
+    @filepath = File.join(Rails.application.root, 'app', 'files', File.basename(filename))
+    raise(ArgumentError, 'File does not exist!') unless File.exist?(@filepath)
 
     @lines_offsets = index_file
   end
 
   def read_line(line_number)
-    raise(ArgumentError, 'Invalid line number!') if line_number <= 0
+    raise(ArgumentError, 'Invalid line number!') if line_number.to_i <= 0
 
     offset = lines_offsets[line_number]
-    raise(IndexError, 'Line number out of range!') unless offset
+    raise(IndexError, 'Line number out of range!') if offset.blank?
 
-    File.open(file_path, 'r') do |f|
+    File.open(filepath, 'r') do |f|
       f.seek(offset)
       f.readline
     end
-  rescue StandardError => e
-    Rails.logger.error("Failed to read line #{line_number}: #{e.message}")
-    raise e
   end
 
   private
 
   # rubocop:disable Rails/Output
   def index_file
-    puts "\n#### Starting Indexing File \"#{File.basename(file_path)}\" ####\n\n"
+    puts "\n#### Starting Indexing File \"#{File.basename(filepath)}\" ####\n\n"
 
     offsets = {}
     current_offset = 0
     line_number = 1
 
-    File.foreach(file_path) do |line|
+    File.foreach(filepath) do |line|
       draw_indexed_lines_counter(line_number)
       offsets[line_number] = current_offset
       current_offset += line.bytesize
       line_number += 1
     end
 
-    raise 'File is empty!' if offsets.empty?
+    raise(StandardError, 'File is empty!') if offsets.empty?
 
     puts "\n\n#### Finished Indexing #{line_number -= 1} lines from File! ####\n\n"
     offsets
