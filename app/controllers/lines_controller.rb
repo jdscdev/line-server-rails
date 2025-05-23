@@ -17,7 +17,7 @@ class LinesController < ApplicationController
 
   def line_index_instance
     # Not exactly being injected (DI) but still inverting the lookup, which enables testing and mocking.
-    # NOTE: Rails doesn't use custom initialize method when instantiating controllers in tests or in production.
+    # NOTE: Rails ignores your custom "initialize(args)" (constructors with params) in controllers, in tests and in prod
     Rails.application.config.line_index_instance
   end
 
