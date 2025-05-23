@@ -1,17 +1,12 @@
 # frozen_string_literal: true
 
 class LinesController < ApplicationController
-  def initialize(line_index_instance = Rails.application.config.line_index_instance)
-    super()
-    @line_index_instance = line_index_instance
-  end
-
   def show
-    line_text = @line_index_instance.read_line(line_index)
+    line_text = line_index_instance.read_line(line_index)
 
     render(json: { line: line_text }, status: :ok)
-  rescue IndexError
-    render(json: { error: 'Line number out of range' }, status: :content_too_large)
+  rescue IndexError => e
+    render(json: { error: e.message }, status: :content_too_large)
   rescue ArgumentError => e
     render(json: { error: e.message }, status: :bad_request)
   rescue StandardError => e
@@ -19,6 +14,12 @@ class LinesController < ApplicationController
   end
 
   private
+
+  def line_index_instance
+    # Not exactly being injected (DI) but still inverting the lookup, which enables testing and mocking.
+    # NOTE: Rails doesn't use custom initialize method when instantiating controllers in tests or in production.
+    Rails.application.config.line_index_instance
+  end
 
   def line_index
     params.permit(:index)
